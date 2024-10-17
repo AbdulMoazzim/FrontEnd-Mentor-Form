@@ -1,0 +1,330 @@
+html {
+    overflow: hidden;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Ubuntu", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: hsl(206, 94%, 87%);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin-top: 90px;
+}
+main {
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 85vw;
+    height: 80vh;
+}
+
+.steps {
+    margin: 20px 0;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.banner {
+    height: 70vh;
+    background-image: url(assets/images/bg-sidebar-desktop.svg);
+    width: 25vw;
+    padding: 20px 20px 0 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+}
+
+.circles {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    font-weight: 700;
+}
+.colorOnClick {
+    border: 1px solid white;
+    color: white;
+}
+.descrip {
+    color: white;
+    font-weight: 700;
+}
+.stepNo {
+    color: hsl(231, 11%, 63%);
+    margin-bottom: 3px;
+}
+#content1, #content2, #content3, #content4 {
+    width: 50vw;
+}
+
+h1 {
+    font-size: 48px;
+}
+label, input {
+    font-size: 22px;
+}
+label {
+    padding-bottom: 10px;
+}
+
+.info {
+    width: 40vw;
+    padding: 7px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid hsl(231, 11%, 63%);
+}
+.info:focus,.plans {
+    background-color: hsl(231deg 9.68% 91.28%);
+    border: 1px solid hsl(243, 100%, 62%);
+}
+h1, label, input {
+    color: hsl(213, 96%, 18%);
+}
+#step1Info, #step2Info, #step3Info, #step4Info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+#step1Info p, #option {
+    font-size: 18px;
+    padding: 10px 0 20px 0;
+    color: hsl(231, 11%, 63%);
+}
+
+
+#next1a, #next2a {
+    display: flex;
+    justify-content: end;
+}
+#next1b, #next2b {
+    display: flex;
+    justify-content: space-between;
+}
+
+#next2a, #next2b{
+    padding: 20px;
+    width: 100vw;
+    height: 13vh;
+    display: none;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    background-color: white;
+}
+#next1b {
+    margin-top: 40px;
+}
+
+#btn1 {
+    padding: 15px 30px;
+}
+#btn2 {
+    padding: 5px 30px;
+}
+#btn1, #btn2 {
+    font-size: 18px;
+    border-radius: 10px;
+    color: white;
+    border: 0;
+    background-color: hsl(213, 96%, 18%);
+    cursor: pointer;
+}
+#btn2 {
+    margin: 0 30px;
+}
+
+.MyplansA {
+    margin: 45px 0 25px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.MyplansA, .MyplansB {
+    width: 100%;
+}
+.plansA {
+    flex-direction: column;
+    padding: 10px;
+    height: 205px;
+    width: 190px;
+    cursor: pointer;
+}
+
+.plansA, .plansB {
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid hsl(231, 11%, 63%);
+}
+.plansB {
+    padding: 0 30px;
+    height: 80px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heads {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tickBox {
+    margin-right: 30px;
+}
+.tickBox input {
+    height: 20px;
+    width: 50px;
+}
+
+.plansA img {
+    width: 60px;
+    padding-bottom: 45px;
+}
+.heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: hsl(213, 96%, 18%);
+}
+.txt {
+    font-size: 20px;
+    color: hsl(231, 11%, 63%);
+}
+
+#ways {
+    border-radius: 10px;
+    background-color: hsl(231deg 9.68% 91.28%);
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+
+}
+.way {
+    font-size: 20px;
+    font-weight: 700;
+    color: hsl(231, 11%, 63%);
+}
+#planBtn {
+    padding: 3px;
+    border-radius: 15px;
+    margin: 0 20px;
+    width: 50px;
+    height: 30px;
+    background: hsl(213, 96%, 18%);
+}
+#planBtn div {
+    background: white;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+}
+
+#goBack {
+    cursor: pointer;
+    font-weight: 500;
+    color: hsl(213, 96%, 18%);
+    font-size: 19px;
+    border: 0;
+    background: white;
+}
+
+@media (max-width: 1060px) {
+    .heading, .txt {
+        font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+        width: 90vw;
+        height: 70vh;
+        flex-direction: column;
+    }
+    .banner {
+        padding: 0;
+        flex-direction: row;
+        width: 100vw;
+        background-image: url(assets/images/bg-sidebar-mobile.svg);
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 120px;
+        z-index: -1;
+    }
+    #content1, #content2,#content3, #content4, .info, #ways, .plans {
+       width: 100%;
+    }
+    #next1a, #next1b {
+        display: none;
+    }
+    #next2a, #next2b {
+        display: flex;
+    }
+    .stepInfo {
+        display: none;
+    }
+    .steps {
+        justify-content: center;
+    }
+    .circles,.steps {
+        margin: 0;
+    }
+    label, input {
+        font-size: 18px;
+    }
+    #step1Info h1, #step2Info h1, #step3Info h1, #step4Info h1 {
+        font-size: 32px;
+    }
+    #step2Info p,  #step3Info p{
+        font-size: 13px;
+    }
+    .MyplansA {
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+    .plansA {
+        flex-direction: row;
+        height: 60px;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+    .plansA img {
+        width: 40px;
+        padding: 0;
+    }
+    .plansA div {
+        padding-left: 20px;
+    }
+    .plansA p {
+        font-size: 16px;
+    }
+    #next2b button {
+        margin: 0;
+    }
+    .way {
+        font-size: 16px;
+    }
+    .plansB {
+        padding: 0 10px;
+    }
+}
