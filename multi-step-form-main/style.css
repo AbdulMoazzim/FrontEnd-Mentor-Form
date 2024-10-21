@@ -6,6 +6,7 @@ html {
     padding: 0;
     font-family: "Ubuntu", sans-serif;
     box-sizing: border-box;
+    transition: left 1s linear;
 }
 
 body {
@@ -23,7 +24,7 @@ main {
     justify-content: space-between;
     display: flex;
     width: 85vw;
-    height: 80vh;
+    height: max-content;
 }
 
 .steps {
@@ -37,10 +38,10 @@ main {
 .banner {
     height: 70vh;
     background-image: url(assets/images/bg-sidebar-desktop.svg);
-    width: 25vw;
+    width: 30vw;
     padding: 20px 20px 0 20px;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     display: flex;
     flex-direction: column;
 }
@@ -55,6 +56,10 @@ main {
     border-radius: 50%;
     font-weight: 700;
 }
+#firstCircle {
+    background-color: hsl(206, 94%, 87%);
+    color: hsl(213, 96%, 18%);
+}
 .colorOnClick {
     border: 1px solid white;
     color: white;
@@ -67,8 +72,8 @@ main {
     color: hsl(231, 11%, 63%);
     margin-bottom: 3px;
 }
-#content1, #content2, #content3, #content4 {
-    width: 50vw;
+#myContent {
+    width: 40vw;
 }
 
 h1 {
@@ -95,49 +100,47 @@ label {
 h1, label, input {
     color: hsl(213, 96%, 18%);
 }
-#step1Info, #step2Info, #step3Info, #step4Info {
+#stepInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
-#step1Info p, #option {
+#stepInfo p, #option {
     font-size: 18px;
     padding: 10px 0 20px 0;
     color: hsl(231, 11%, 63%);
 }
 
 
-#next1a, #next2a {
-    display: flex;
-    justify-content: end;
-}
-#next1b, #next2b {
+
+#next1, #next2 {
     display: flex;
     justify-content: space-between;
 }
 
-#next2a, #next2b{
+#next2{
     padding: 20px;
     width: 100vw;
-    height: 13vh;
+    height: 100px;
     display: none;
     bottom: 0;
     left: 0;
     position: absolute;
     background-color: white;
 }
-#next1b {
+#next1 {
     margin-top: 40px;
 }
 
-#btn1 {
+#btn1, #confirm {
     padding: 15px 30px;
 }
-#btn2 {
+#btn2, #confirm {
+    margin: 0 30px;
     padding: 5px 30px;
 }
-#btn1, #btn2 {
+.btns {
     font-size: 18px;
     border-radius: 10px;
     color: white;
@@ -145,20 +148,23 @@ h1, label, input {
     background-color: hsl(213, 96%, 18%);
     cursor: pointer;
 }
-#btn2 {
-    margin: 0 30px;
+#confirm {
+    display: none;
 }
-
-.MyplansA {
+#MyplansA {
+    flex-wrap: wrap;
     margin: 45px 0 25px 0;
-    display: flex;
     justify-content: space-between;
+    display: none;
 }
-
-.MyplansA, .MyplansB {
+#MyplansB {
+    display: none;
+}
+#MyplansA, #MyplansB {
     width: 100%;
 }
 .plansA {
+    margin-bottom: 30px;
     flex-direction: column;
     padding: 10px;
     height: 205px;
@@ -197,25 +203,34 @@ h1, label, input {
     width: 60px;
     padding-bottom: 45px;
 }
-.heading {
+.headingA, .headingB {
     font-size: 24px;
     font-weight: 700;
     color: hsl(213, 96%, 18%);
 }
-.txt {
+.free {
+    display: none;
+}
+.txt1 {
     font-size: 20px;
     color: hsl(231, 11%, 63%);
 }
-
+.txt2 {
+    font-weight: 600;
+}
 #ways {
     border-radius: 10px;
     background-color: hsl(231deg 9.68% 91.28%);
     height: 60px;
     align-items: center;
     justify-content: center;
-    display: flex;
     width: 100%;
+    display: none;
+}
 
+#cir {
+    position: relative;
+    left: 0%;
 }
 .way {
     font-size: 20px;
@@ -237,7 +252,8 @@ h1, label, input {
     width: 25px;
 }
 
-#goBack {
+#goBack1, #goBack2 {
+    display: none;
     cursor: pointer;
     font-weight: 500;
     color: hsl(213, 96%, 18%);
@@ -246,16 +262,42 @@ h1, label, input {
     background: white;
 }
 
+.clickOnA {
+    background-color: rgb(217 229 255);
+    border-color: hsl(243, 100%, 62%);
+}
+.clickOffA {
+    background-color: white;
+    border-color: hsl(231, 11%, 63%);
+}
+.clickOnB {
+    background-color: rgb(217 229 255);
+    border-color: hsl(243, 100%, 62%);
+}
+.txtblack {
+    color: black;
+}
+.txtpurple {
+    color: hsl(243, 100%, 62%);
+}
+.clickOffB {
+    background-color: white;
+    border-color: hsl(231, 11%, 63%);
+}
+
 @media (max-width: 1060px) {
-    .heading, .txt {
+    .headingA,.headingB, .txt {
         font-size: 16px;
     }
+    #MyplansA {
+        justify-content: center;
+        align-items: center;
+    }
 }
-@media (max-width: 768px) {
+@media (max-width: 825px) {
     main {
         padding: 20px;
         width: 90vw;
-        height: 70vh;
         flex-direction: column;
     }
     .banner {
@@ -270,13 +312,13 @@ h1, label, input {
         height: 120px;
         z-index: -1;
     }
-    #content1, #content2,#content3, #content4, .info, #ways, .plans {
+    #myContent, .info, #ways, .plans {
        width: 100%;
     }
-    #next1a, #next1b {
+    #next1 {
         display: none;
     }
-    #next2a, #next2b {
+    #next2 {
         display: flex;
     }
     .stepInfo {
@@ -291,18 +333,19 @@ h1, label, input {
     label, input {
         font-size: 18px;
     }
-    #step1Info h1, #step2Info h1, #step3Info h1, #step4Info h1 {
+    #stepInfo h1 {
         font-size: 32px;
     }
-    #step2Info p,  #step3Info p{
+    #stepInfo p{
         font-size: 13px;
     }
-    .MyplansA {
+    #MyplansA {
         margin: 0;
         flex-direction: column;
         align-items: center;
     }
     .plansA {
+        width: 100%;
         flex-direction: row;
         height: 60px;
         margin-bottom: 20px;
@@ -318,7 +361,7 @@ h1, label, input {
     .plansA p {
         font-size: 16px;
     }
-    #next2b button {
+    #next2 button {
         margin: 0;
     }
     .way {
