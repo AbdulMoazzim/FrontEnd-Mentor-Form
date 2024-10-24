@@ -285,6 +285,27 @@ h1, label, input {
     border-color: hsl(231, 11%, 63%);
 }
 
+#required1 {
+    color: red;
+    margin-top: 20px;
+    font-size: 22px;
+    display: none;
+}
+#planApack, #planBpack {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#final {
+    border-radius: 10px;
+    background-color: hsl(0deg 0% 83.46%);
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 @media (max-width: 1060px) {
     .headingA,.headingB, .txt {
         font-size: 16px;

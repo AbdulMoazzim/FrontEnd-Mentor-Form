@@ -15,6 +15,9 @@ let html1 = [
 
   `<h1>Pick add-ons</h1>
   <p id="option">Add-ons help enhance your gaming experience.</p>`,
+
+  `<h1>Finishing up</h1>
+  <p id="option">Double-check everything looks OK before Confirming.</p>`
 ];
 
 
@@ -75,6 +78,7 @@ let free = document.querySelectorAll(".free");
 let planBtn = document.querySelector("#planBtn") as HTMLElement;
 let ways = document.querySelector("#ways") as HTMLElement;
 let cir = document.querySelector("#cir") as HTMLElement;
+let req1 = document.querySelector("#required1") as HTMLElement;
 
 function next(): void {
   if (count < 4) {
@@ -84,16 +88,22 @@ function next(): void {
       ways.style.display = "flex";
       planA.style.display = "flex"
       planB.style.display = "none"
+      if (obj1.length == 0) {
+        req1.style.display = "block";
+        return;
+      }
     }
     else if (count == 2){
       ways.style.display = "none";
       planB.style.display = "block"
       planA.style.display = "none"
+      req1.style.display = "none";
     }
     else {
       ways.style.display = "none";
       planB.style.display = "none"
       planA.style.display = "none"
+      req1.style.display = "none";
     }
   }
 }
@@ -185,7 +195,7 @@ interface data2 {
 }
 
 let obj1: data1[];
-let obj2: data2[];
+let obj2: data2[] = [];
 
 plansA.forEach((val,index)=>{
   val.addEventListener('click',()=>{
@@ -211,12 +221,19 @@ tick.forEach((val,index)=>{
       plansB[index].classList.add("clickOffB");
       txt2[index].classList.remove("txtpurple");
       txt2[index].classList.add("txtblack");
+      obj2.forEach((val)=>{
+        if (val.package == headingB[index].innerHTML) {
+          obj2.splice(index,1);
+        }
+      })
     }
     else {
       plansB[index].classList.remove("clickOffB");
       plansB[index].classList.add("clickOnB");
       txt2[index].classList.remove("txtblack");
       txt2[index].classList.add("txtpurple");
+      obj2.push({package: headingB[index].innerHTML, price: txt2[index].innerHTML});
     }
+    console.log(obj2);
   })
 })
