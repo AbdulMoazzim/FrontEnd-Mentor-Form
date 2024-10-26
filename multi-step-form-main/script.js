@@ -36,12 +36,10 @@ function func() {
     if (count > 0 && count < 3) {
         goBack1.style.display = "block";
         goBack2.style.display = "block";
-        Confirm.style.display = "none";
         next1.style.display = "block";
         next2.style.display = "block";
     }
     else if (count > 2) {
-        Confirm.style.display = "block";
         next1.style.display = "none";
         next2.style.display = "none";
     }
@@ -73,54 +71,15 @@ let planBtn = document.querySelector("#planBtn");
 let ways = document.querySelector("#ways");
 let cir = document.querySelector("#cir");
 let req1 = document.querySelector("#required1");
-function next() {
-    if (count < 4) {
+let final = document.querySelector("#final");
+let content = document.querySelector("#myContent");
+Confirm.addEventListener("click", () => {
+    if (content) {
         count++;
         func();
-        if (count == 1) {
-            ways.style.display = "flex";
-            planA.style.display = "flex";
-            planB.style.display = "none";
-            if (obj1.length == 0) {
-                req1.style.display = "block";
-                return;
-            }
-        }
-        else if (count == 2) {
-            ways.style.display = "none";
-            planB.style.display = "block";
-            planA.style.display = "none";
-            req1.style.display = "none";
-        }
-        else {
-            ways.style.display = "none";
-            planB.style.display = "none";
-            planA.style.display = "none";
-            req1.style.display = "none";
-        }
+        content.innerHTML = `<h1>You have Submitted your response! Come Again Visit Us!</h1>`;
     }
-}
-function previous() {
-    if (count > -1) {
-        count--;
-        func();
-        if (count == 1) {
-            ways.style.display = "flex";
-            planA.style.display = "flex";
-            planB.style.display = "none";
-        }
-        else if (count == 2) {
-            ways.style.display = "none";
-            planB.style.display = "block";
-            planA.style.display = "none";
-        }
-        else {
-            ways.style.display = "none";
-            planA.style.display = "none";
-            planB.style.display = "none";
-        }
-    }
-}
+});
 if (next1) {
     next1.addEventListener("click", next);
 }
@@ -172,7 +131,7 @@ if (planBtn) {
         }
     });
 }
-let obj1;
+let obj1 = [];
 let obj2 = [];
 plansA.forEach((val, index) => {
     val.addEventListener('click', () => {
@@ -211,6 +170,119 @@ tick.forEach((val, index) => {
             txt2[index].classList.add("txtpurple");
             obj2.push({ package: headingB[index].innerHTML, price: txt2[index].innerHTML });
         }
-        console.log(obj2);
     });
 });
+function val1(obj1) {
+    let html2 = "";
+    if (obj1.length !== 0) {
+        html2 = `<div id="planApack">
+        <div>
+          <p class="blue">${obj1[0].package}</p>
+          <p id="Change" class="grey">Change</p>
+        </div>
+        <div>
+          <p id="price" class="blue">${obj1[0].price}</p>
+        </div>
+      </div>
+      <div style="width: 100%; height: 2px; background-color: black; margin: 20px 0;"></div>`;
+    }
+    return html2.length > 0 ? html2 : "";
+}
+function val2(obj2) {
+    let html3 = ``;
+    for (let i = 0; i < obj2.length; i++) {
+        html3 += `<div id="planBpack">
+    <div>
+      <p class="grey">${obj2[i].package}</p>
+    </div>
+    <div>
+      <p id="price" class="blue">${obj2[i].price}</p>
+    </div>
+  </div>`;
+    }
+    return html3;
+}
+function next() {
+    if (count < 4) {
+        count++;
+        func();
+        if (count == 1) {
+            final.style.display = "none";
+            ways.style.display = "flex";
+            planA.style.display = "flex";
+            planB.style.display = "none";
+            Confirm.style.display = "none";
+        }
+        else if (count == 2) {
+            final.style.display = "none";
+            ways.style.display = "none";
+            planB.style.display = "block";
+            planA.style.display = "none";
+            Confirm.style.display = "none";
+        }
+        else if (count == 3) {
+            final.style.display = "block";
+            let myVal = val1(obj1) + val2(obj2);
+            if (myVal === "") {
+                final.innerHTML = "<h3>You didn't select any plan</h3>";
+                Confirm.style.display = "none";
+            }
+            else {
+                final.innerHTML = myVal;
+                Confirm.style.display = "block";
+            }
+            ways.style.display = "none";
+            planB.style.display = "none";
+            planA.style.display = "none";
+        }
+        else {
+            final.style.display = "none";
+            ways.style.display = "none";
+            planB.style.display = "none";
+            planA.style.display = "none";
+            Confirm.style.display = "none";
+        }
+    }
+}
+function previous() {
+    if (count > -1) {
+        count--;
+        func();
+        if (count == 1) {
+            final.style.display = "none";
+            ways.style.display = "flex";
+            planA.style.display = "flex";
+            planB.style.display = "none";
+            Confirm.style.display = "none";
+        }
+        else if (count == 2) {
+            final.style.display = "none";
+            ways.style.display = "none";
+            planB.style.display = "block";
+            planA.style.display = "none";
+            Confirm.style.display = "none";
+        }
+        else if (count == 3) {
+            final.style.display = "block";
+            let myVal = val1(obj1) + val2(obj2);
+            if (myVal === "") {
+                final.innerHTML = "<h3>You didn't select any plan</h3>";
+                Confirm.style.display = "none";
+            }
+            else {
+                final.innerHTML = myVal;
+                Confirm.style.display = "block";
+            }
+            ways.style.display = "none";
+            planB.style.display = "none";
+            planA.style.display = "none";
+        }
+        else {
+            final.style.display = "none";
+            ways.style.display = "none";
+            planB.style.display = "none";
+            planA.style.display = "none";
+            Confirm.style.display = "none";
+        }
+    }
+}
