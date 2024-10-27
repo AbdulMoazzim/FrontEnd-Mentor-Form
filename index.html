@@ -49,11 +49,20 @@
           <div id="stepInfo">
             <h1>Personal Info</h1>
             <p>Please provide your name, email address, and phone number.</p>
-            <label for="name">Name</label>
+            <div>
+              <p id="required1">Please Select One Plan!</p>
+              <label for="name">Name</label>
+            </div>
             <input type="text" id="name" class="info" placeholder="e.g. Khan"/>
-            <label for="email">Email Address</label>
+            <div>
+              <p id="required1">Please Select One Plan!</p>
+              <label for="email">Email Address</label>
+            </div>
             <input type="email" id="email" class="info" placeholder="e.g.abc@gmail.com"/>
-            <label for="number">Phone Number</label>
+            <div>
+              <p id="required1">Please Select One Plan!</p>
+              <label for="number">Phone Number</label>
+            </div>
             <input type="number" id="number" class="info" placeholder="e.g. +1 234 567 890"/>
           </div>
         </div>
@@ -130,19 +139,22 @@
           </div>
           <p class="way">Yearly</p>
         </div>
-        <p id="required1">Please Select One Plan!</p>
         <div id="final"></div>
+        <div id="calculation">
+          <p class="grey">Total (per year)</p>
+          <p id="calculate" class="grey"></p>
+        </div>
         <div id="next1">
           <button id="goBack1">Go Back</button>
           <button id="btn1" class="btns">Next Step</button>
-          <button class="btns" id="confirm">Confirm</button>
+          <button class="btns" id="confirm1">Confirm</button>
         </div>
       </div>
     </main>
     <div id="next2">
       <button id="goBack2">Go Back</button>
       <button id="btn2" class="btns">Next Step</button>
-      <button class="btns" id="confirm">Confirm</button>
+      <button class="btns" id="confirm2">Confirm</button>
     </div>
     <script src="script.js"></script>
   </body>

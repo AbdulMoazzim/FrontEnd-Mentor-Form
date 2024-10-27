@@ -33,30 +33,34 @@ function func() {
     if (myDiv) {
         myDiv.innerHTML = html1[count];
     }
+    goBack1.style.display = "none";
+    goBack2.style.display = "none";
+    next1.style.display = "none";
+    next2.style.display = "none";
     if (count > 0 && count < 3) {
         goBack1.style.display = "block";
         goBack2.style.display = "block";
         next1.style.display = "block";
         next2.style.display = "block";
     }
-    else if (count > 2) {
-        next1.style.display = "none";
-        next2.style.display = "none";
+    else if (count == 3) {
+        goBack1.style.display = "block";
+        goBack2.style.display = "block";
     }
     else {
-        goBack1.style.display = "none";
-        goBack2.style.display = "none";
         next1.style.display = "block";
         next2.style.display = "block";
     }
 }
+let nextdiv = document.querySelector("#next2");
 let goBack1 = document.querySelector("#goBack1");
 let goBack2 = document.querySelector("#goBack2");
 let next1 = document.querySelector("#btn1");
 let next2 = document.querySelector("#btn2");
 let circles = document.querySelectorAll(".circles");
 let myDiv = document.querySelector("#stepInfo");
-let Confirm = document.querySelector("#confirm");
+let Confirm1 = document.querySelector("#confirm1");
+let Confirm2 = document.querySelector("#confirm2");
 let planA = document.querySelector("#MyplansA");
 let planB = document.querySelector("#MyplansB");
 let plansA = document.querySelectorAll(".plansA");
@@ -73,10 +77,18 @@ let cir = document.querySelector("#cir");
 let req1 = document.querySelector("#required1");
 let final = document.querySelector("#final");
 let content = document.querySelector("#myContent");
-Confirm.addEventListener("click", () => {
+let calculation = document.querySelector("#calculation");
+let calculate = document.querySelector("#calculate");
+Confirm1.addEventListener("click", () => {
     if (content) {
         count++;
-        func();
+        content.innerHTML = `<h1>You have Submitted your response! Come Again Visit Us!</h1>`;
+    }
+});
+Confirm2.addEventListener("click", () => {
+    if (content) {
+        count++;
+        nextdiv.style.display = "none";
         content.innerHTML = `<h1>You have Submitted your response! Come Again Visit Us!</h1>`;
     }
 });
@@ -105,7 +117,7 @@ if (planBtn) {
             });
             txt2.forEach((val, index) => {
                 const element = val;
-                element.innerHTML = `+$${paid2[0][index]}/yr`;
+                element.innerHTML = `+$${paid2[1][index]}/yr`;
             });
             free.forEach((val) => {
                 const element = val;
@@ -121,7 +133,7 @@ if (planBtn) {
             });
             txt2.forEach((val, index) => {
                 const element = val;
-                element.innerHTML = `+$${paid2[1][index]}/mo`;
+                element.innerHTML = `+$${paid2[0][index]}/mo`;
             });
             free.forEach((val) => {
                 const element = val;
@@ -147,7 +159,12 @@ plansA.forEach((val, index) => {
             val.classList.remove("clickOffA");
             val.classList.add("clickOnA");
         }
-        obj1 = [{ package: headingA[index].innerHTML, price: txt1[index].innerHTML }];
+        if (counting == 0) {
+            obj1 = [{ package: headingA[index].innerHTML, price: txt1[index].innerHTML, no: paid1[0][index] }];
+        }
+        else {
+            obj1 = [{ package: headingA[index].innerHTML, price: txt1[index].innerHTML, no: paid1[1][index] }];
+        }
     });
 });
 tick.forEach((val, index) => {
@@ -168,7 +185,12 @@ tick.forEach((val, index) => {
             plansB[index].classList.add("clickOnB");
             txt2[index].classList.remove("txtblack");
             txt2[index].classList.add("txtpurple");
-            obj2.push({ package: headingB[index].innerHTML, price: txt2[index].innerHTML });
+            if (counting == 0) {
+                obj2.push({ package: headingB[index].innerHTML, price: txt2[index].innerHTML, no: paid2[0][index] });
+            }
+            else {
+                obj2.push({ package: headingB[index].innerHTML, price: txt2[index].innerHTML, no: paid2[1][index] });
+            }
         }
     });
 });
@@ -206,41 +228,38 @@ function next() {
     if (count < 4) {
         count++;
         func();
+        final.style.display = "none";
+        planB.style.display = "none";
+        Confirm1.style.display = "none";
+        Confirm2.style.display = "none";
+        ways.style.display = "none";
+        planA.style.display = "none";
+        calculation.style.display = "none";
         if (count == 1) {
-            final.style.display = "none";
             ways.style.display = "flex";
             planA.style.display = "flex";
-            planB.style.display = "none";
-            Confirm.style.display = "none";
         }
         else if (count == 2) {
-            final.style.display = "none";
-            ways.style.display = "none";
             planB.style.display = "block";
-            planA.style.display = "none";
-            Confirm.style.display = "none";
         }
         else if (count == 3) {
             final.style.display = "block";
             let myVal = val1(obj1) + val2(obj2);
             if (myVal === "") {
                 final.innerHTML = "<h3>You didn't select any plan</h3>";
-                Confirm.style.display = "none";
             }
             else {
                 final.innerHTML = myVal;
-                Confirm.style.display = "block";
+                if (counting == 0) {
+                    calculate.innerHTML = `$${billing(obj1, obj2)}/mo`;
+                }
+                else {
+                    calculate.innerHTML = `$${billing(obj1, obj2)}/yr`;
+                }
+                calculation.style.display = "flex";
+                Confirm1.style.display = "block";
+                Confirm2.style.display = "block";
             }
-            ways.style.display = "none";
-            planB.style.display = "none";
-            planA.style.display = "none";
-        }
-        else {
-            final.style.display = "none";
-            ways.style.display = "none";
-            planB.style.display = "none";
-            planA.style.display = "none";
-            Confirm.style.display = "none";
         }
     }
 }
@@ -248,41 +267,47 @@ function previous() {
     if (count > -1) {
         count--;
         func();
+        final.style.display = "none";
+        planB.style.display = "none";
+        Confirm1.style.display = "none";
+        Confirm2.style.display = "none";
+        ways.style.display = "none";
+        planA.style.display = "none";
         if (count == 1) {
-            final.style.display = "none";
             ways.style.display = "flex";
             planA.style.display = "flex";
-            planB.style.display = "none";
-            Confirm.style.display = "none";
         }
         else if (count == 2) {
-            final.style.display = "none";
-            ways.style.display = "none";
             planB.style.display = "block";
-            planA.style.display = "none";
-            Confirm.style.display = "none";
         }
         else if (count == 3) {
             final.style.display = "block";
             let myVal = val1(obj1) + val2(obj2);
             if (myVal === "") {
                 final.innerHTML = "<h3>You didn't select any plan</h3>";
-                Confirm.style.display = "none";
             }
             else {
                 final.innerHTML = myVal;
-                Confirm.style.display = "block";
+                if (counting == 0) {
+                    calculate.innerHTML = `$${billing(obj1, obj2)}/mo`;
+                }
+                else {
+                    calculate.innerHTML = `$${billing(obj1, obj2)}/yr`;
+                }
+                calculation.style.display = "flex";
+                Confirm1.style.display = "block";
+                Confirm2.style.display = "block";
             }
-            ways.style.display = "none";
-            planB.style.display = "none";
-            planA.style.display = "none";
-        }
-        else {
-            final.style.display = "none";
-            ways.style.display = "none";
-            planB.style.display = "none";
-            planA.style.display = "none";
-            Confirm.style.display = "none";
         }
     }
+}
+function billing(obj1, obj2) {
+    let amount = 0;
+    if (obj1.length > 0) {
+        amount += obj1[0].no;
+    }
+    for (let i = 0; i < obj2.length; i++) {
+        amount += obj2[i].no;
+    }
+    return amount;
 }
