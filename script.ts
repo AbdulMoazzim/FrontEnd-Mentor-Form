@@ -2,7 +2,7 @@ let count: number = 0;
 
 let html1 = [
   `<h1>Personal Info</h1>
-  <p>Please provide your name, email address, and phone number.</p>
+  <p class="para">Please provide your name, email address, and phone number.</p>
   <label for="name">Name</label>
   <input type="text" id="name" class="info">
   <label for="email">Email Address</label>
@@ -11,13 +11,13 @@ let html1 = [
   <input type="number" id="number" class="info">`,
 
   `<h1>Select your plan</h1>
-  <p id="option">You have the option of monthly or yearly billing.</p>`,
+  <p class="para">You have the option of monthly or yearly billing.</p>`,
 
   `<h1>Pick add-ons</h1>
-  <p id="option">Add-ons help enhance your gaming experience.</p>`,
+  <p class="para">Add-ons help enhance your gaming experience.</p>`,
 
   `<h1>Finishing up</h1>
-  <p id="option">Double-check everything looks OK before Confirming.</p>`
+  <p class="para">Double-check everything looks OK before Confirming.</p>`
 ];
 
 
@@ -58,6 +58,9 @@ function func():void {
 }
  
 
+let info1 = document.querySelector("#name") as HTMLInputElement;
+let info2 = document.querySelector("#email") as HTMLInputElement;
+let info3 = document.querySelector("#number") as HTMLInputElement;
 let nextdiv = document.querySelector("#next2") as HTMLElement;
 let goBack1 = document.querySelector("#goBack1") as HTMLElement;
 let goBack2 = document.querySelector("#goBack2") as HTMLElement;
@@ -80,11 +83,32 @@ let free = document.querySelectorAll(".free");
 let planBtn = document.querySelector("#planBtn") as HTMLElement;
 let ways = document.querySelector("#ways") as HTMLElement;
 let cir = document.querySelector("#cir") as HTMLElement;
-let req1 = document.querySelector("#required1") as HTMLElement;
+let req = document.querySelectorAll(".required");
 let final = document.querySelector("#final") as HTMLElement;
 let content = document.querySelector("#myContent") as HTMLElement;
 let calculation = document.querySelector("#calculation") as HTMLElement;
 let calculate = document.querySelector("#calculate") as HTMLElement;
+
+function infochecking(): boolean {
+  if (info1.value === "") {
+    let val = req[0] as HTMLElement;
+    val.style.display = "block";
+    return false;
+  }
+  else if (info2.value === "") {
+    let val = req[1] as HTMLElement;
+    val.style.display = "block";
+    return false;
+  }
+  else if (info3.value === "") {
+    let val = req[2] as HTMLElement;
+    val.style.display = "block";
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 Confirm1.addEventListener("click",()=>{
   if (content) {
@@ -250,8 +274,15 @@ function val2(obj2: data1[]): string{
 
 function next(): void {
   if (count < 4) {
-    count++;
-    func();
+    req.forEach((val)=>{
+      let reqs = val as HTMLElement;
+      reqs.style.display = "none";
+    })
+    let bool = infochecking();
+    if (bool) {
+      count++;
+      func();
+    }
     final.style.display = "none";
     planB.style.display = "none"
     Confirm1.style.display = "none";
@@ -290,8 +321,15 @@ function next(): void {
 
 function previous(): void {
   if (count > -1) {
-    count--;
-    func();
+    req.forEach((val)=>{
+      let reqs = val as HTMLElement;
+      reqs.style.display = "none";
+    })
+    let bool = infochecking();
+    if (bool) {
+      count--;
+      func();
+    }
     final.style.display = "none";
     planB.style.display = "none"
     Confirm1.style.display = "none";

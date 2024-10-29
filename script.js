@@ -2,7 +2,7 @@
 let count = 0;
 let html1 = [
     `<h1>Personal Info</h1>
-  <p>Please provide your name, email address, and phone number.</p>
+  <p class="para">Please provide your name, email address, and phone number.</p>
   <label for="name">Name</label>
   <input type="text" id="name" class="info">
   <label for="email">Email Address</label>
@@ -10,11 +10,11 @@ let html1 = [
   <label for="number">Phone Number</label>
   <input type="number" id="number" class="info">`,
     `<h1>Select your plan</h1>
-  <p id="option">You have the option of monthly or yearly billing.</p>`,
+  <p class="para">You have the option of monthly or yearly billing.</p>`,
     `<h1>Pick add-ons</h1>
-  <p id="option">Add-ons help enhance your gaming experience.</p>`,
+  <p class="para">Add-ons help enhance your gaming experience.</p>`,
     `<h1>Finishing up</h1>
-  <p id="option">Double-check everything looks OK before Confirming.</p>`
+  <p class="para">Double-check everything looks OK before Confirming.</p>`
 ];
 function func() {
     if (circles) {
@@ -52,6 +52,9 @@ function func() {
         next2.style.display = "block";
     }
 }
+let info1 = document.querySelector("#name");
+let info2 = document.querySelector("#email");
+let info3 = document.querySelector("#number");
 let nextdiv = document.querySelector("#next2");
 let goBack1 = document.querySelector("#goBack1");
 let goBack2 = document.querySelector("#goBack2");
@@ -74,11 +77,31 @@ let free = document.querySelectorAll(".free");
 let planBtn = document.querySelector("#planBtn");
 let ways = document.querySelector("#ways");
 let cir = document.querySelector("#cir");
-let req1 = document.querySelector("#required1");
+let req = document.querySelectorAll(".required");
 let final = document.querySelector("#final");
 let content = document.querySelector("#myContent");
 let calculation = document.querySelector("#calculation");
 let calculate = document.querySelector("#calculate");
+function infochecking() {
+    if (info1.value === "") {
+        let val = req[0];
+        val.style.display = "block";
+        return false;
+    }
+    else if (info2.value === "") {
+        let val = req[1];
+        val.style.display = "block";
+        return false;
+    }
+    else if (info3.value === "") {
+        let val = req[2];
+        val.style.display = "block";
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 Confirm1.addEventListener("click", () => {
     if (content) {
         count++;
@@ -226,8 +249,15 @@ function val2(obj2) {
 }
 function next() {
     if (count < 4) {
-        count++;
-        func();
+        req.forEach((val) => {
+            let reqs = val;
+            reqs.style.display = "none";
+        });
+        let bool = infochecking();
+        if (bool) {
+            count++;
+            func();
+        }
         final.style.display = "none";
         planB.style.display = "none";
         Confirm1.style.display = "none";
@@ -265,8 +295,15 @@ function next() {
 }
 function previous() {
     if (count > -1) {
-        count--;
-        func();
+        req.forEach((val) => {
+            let reqs = val;
+            reqs.style.display = "none";
+        });
+        let bool = infochecking();
+        if (bool) {
+            count--;
+            func();
+        }
         final.style.display = "none";
         planB.style.display = "none";
         Confirm1.style.display = "none";
